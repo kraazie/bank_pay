@@ -57,7 +57,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                 ),
             SizedBox(height: 20),
             const Text(
-              'With the following permission:',
+              'With the following permission: ',
               style: TextStyle(
                 fontSize: 14,
                 // fontWeight: FontWeight.bold,
