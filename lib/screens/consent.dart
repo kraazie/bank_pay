@@ -1,8 +1,10 @@
+import 'package:bank_pay/screens/confimation.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/assets.dart';
 import '../routes.dart';
 import '../widget/custom_button.dart';
+import '../widget/custom_dropdown.dart';
 
 class Account {
   String? accountNumber;
@@ -33,6 +35,7 @@ class _ConsentScreenState extends State<ConsentScreen> {
   int val = -1;
   List<Account> _listAccounts = [];
   List<Consent> _listConsents = [];
+  String? _selectedCityId;
 
   @override
   void initState() {
@@ -129,12 +132,57 @@ class _ConsentScreenState extends State<ConsentScreen> {
                 );
               },
             ),
-            const SizedBox(height: 50),
+            const Text(
+              'Access Time',
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Grant access for following days:',
+              style: TextStyle(
+                fontSize: 14,
+                // fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            CustomDropDown(
+              icon: Icons.location_city_rounded,
+              selectedValue: _selectedCityId,
+              hintText: 'Expiry',
+              itemsList: ["1 Day", "3 Days", "1 Week", "15 Days", "1 Month"].map<DropdownMenuItem<String>>((item) {
+                return DropdownMenuItem(
+                  child: Text(item),
+                  value: item,
+                );
+              }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  print(value);
+                  _selectedCityId = value;
+                });
+                // FocusScope.of(context).requestFocus(focusEmail);
+              },
+            ),
+            const SizedBox(height: 20),
             CustomButton(
               title: 'Continue',
               onPressed: () {
                 FocusScope.of(context).unfocus();
-                Navigator.of(context).pushNamed(Routes.success);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConfirmScreen(
+                      selectedAccount: _listAccounts,
+                      selectedConsent: _listConsents,
+                      days: _selectedCityId,
+                    ),
+                  ),
+                );
               },
             ),
           ],
@@ -244,45 +292,6 @@ class _ConsentScreenState extends State<ConsentScreen> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget buildRadioTile({IconData? icon, String? title, String? desc, required int index}) {
-    return Card(
-      child: RadioListTile(
-        contentPadding: EdgeInsets.zero,
-        title: Text(
-          title ?? '',
-          style: const TextStyle(
-            fontSize: 14,
-          ),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              desc ?? '',
-              style: const TextStyle(
-                fontSize: 14,
-              ),
-            ),
-            Text(
-              desc ?? '',
-              style: const TextStyle(
-                fontSize: 12,
-              ),
-            ),
-          ],
-        ),
-        value: _listAccounts[index].isSelected!,
-        onChanged: (value) {
-          setState(() {
-            val = value as int;
-            _listAccounts[index].isSelected = val == 1 ? true : false;
-          });
-        },
-        groupValue: _listAccounts[index].isSelected!,
       ),
     );
   }

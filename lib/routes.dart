@@ -1,3 +1,4 @@
+import 'package:bank_pay/screens/confimation.dart';
 import 'package:bank_pay/screens/connect.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_pay/screens/account_auth.dart';
@@ -15,6 +16,7 @@ class Routes {
   static const String consent = '/consent';
   static const String otp = '/otp';
   static const String selectAccount = '/selectAccount';
+  static const String confirmation = '/confirmation';
   static const String success = '/success';
 
   static final routes = <String, WidgetBuilder>{
@@ -23,6 +25,7 @@ class Routes {
     otp: (BuildContext context) => OTPScreen(),
     consent: (BuildContext context) => ConsentScreen(),
     selectAccount: (BuildContext context) => SelectAccount(),
+    confirmation: (BuildContext context) => ConfirmScreen(),
     success: (BuildContext context) => Success(),
   };
 }

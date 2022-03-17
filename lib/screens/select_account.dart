@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../routes.dart';
 import '../widget/custom_button.dart';
+import '../widget/custom_dropdown.dart';
 
 class Account {
   String? accountNumber;
@@ -22,6 +23,7 @@ class _SelectAccountState extends State<SelectAccount> {
   bool _value = false;
   int val = -1;
   List<Account> _listAccounts = [];
+  String? _selectedCityId;
 
   @override
   void initState() {
@@ -71,6 +73,24 @@ class _SelectAccountState extends State<SelectAccount> {
                   desc: _listAccounts[index].accountNumber,
                   index: index,
                 );
+              },
+            ),
+            CustomDropDown(
+              icon: Icons.location_city_rounded,
+              selectedValue: _selectedCityId,
+              hintText: 'Expiry',
+              itemsList: ["1 Day", "3 Days", "1 Week", "15 Days", "1 Month"].map<DropdownMenuItem<String>>((item) {
+                return DropdownMenuItem(
+                  child: Text(item),
+                  value: item,
+                );
+              }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  print(value);
+                  _selectedCityId = value;
+                });
+                // FocusScope.of(context).requestFocus(focusEmail);
               },
             ),
             const SizedBox(height: 50),
