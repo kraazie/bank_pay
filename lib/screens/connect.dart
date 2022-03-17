@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:bank_pay/routes.dart';
 
+class Bank {
+  String? bankName;
+  String? image;
+  Bank(this.bankName, this.image);
+}
+
 class ConnectBank extends StatefulWidget {
   ConnectBank({Key? key}) : super(key: key);
 
@@ -9,6 +15,45 @@ class ConnectBank extends StatefulWidget {
 }
 
 class _ConnectBankState extends State<ConnectBank> {
+  List<Bank> _listBanks = [];
+  @override
+  void initState() {
+    super.initState();
+
+    _listBanks.addAll(
+      [
+        Bank('Al Baraka Bank (Pakistan) Limited', ''),
+        Bank('Allied Bank Limited', ''),
+        Bank('Askari Bank', ''),
+        Bank('Bank Alfalah Limited', ''),
+        Bank('Bank Al-Habib Limited', ''),
+        Bank('BankIslami Pakistan Limited', ''),
+        Bank('Citi Bank', ''),
+        Bank('Dubai Islamic Bank Pakistan Limited', ''),
+        Bank('Faysal Bank Limited', ''),
+        Bank('First Women Bank Limited', ''),
+        Bank('Habib Bank Limited', ''),
+        Bank('Standard Chartered Bank (Pakistan) Limited', ''),
+        Bank('Habib Metropolitan Bank Limited', ''),
+        Bank('Industrial and Commercial Bank of China', ''),
+        Bank('Industrial Development Bank of Pakistan', ''),
+        Bank('JS Bank Limited', ''),
+        Bank('MCB Bank Limited', ''),
+        Bank('MCB Islamic Bank Limited', ''),
+        Bank('Meezan Bank Limited', ''),
+        Bank('National Bank of Pakistan', ''),
+        Bank('Bank of Khyber', ''),
+        Bank('Sindh Bank', ''),
+        Bank('Bank of Punjab', ''),
+        Bank('Samba Bank Limited', ''),
+        Bank('Silkbank Limited', ''),
+        Bank('Soneri Bank', ''),
+        Bank('Summit Bank', ''),
+        Bank('United Bank Limited', ''),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,13 +79,14 @@ class _ConnectBankState extends State<ConnectBank> {
             ),
             const SizedBox(height: 20),
             ListView.builder(
+              physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 10,
+              itemCount: _listBanks.length,
               itemBuilder: (BuildContext context, int index) {
                 return Card(
                   child: ListTile(
                     leading: const Icon(Icons.bakery_dining),
-                    title: const Text('HBL'),
+                    title: Text(_listBanks[index].bankName ?? ''),
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () {
                       Navigator.of(context).pushNamed(Routes.accountAuth);
