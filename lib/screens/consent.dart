@@ -63,129 +63,134 @@ class _ConsentScreenState extends State<ConsentScreen> {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20.0),
-        child: ListView(
-          children: [
-            const Image(
-              image: AssetImage(Assets.consent),
-              fit: BoxFit.fitHeight,
-              height: 100,
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'Select Account',
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Image(
+                image: AssetImage(Assets.consent),
+                fit: BoxFit.fitHeight,
+                height: 100,
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'Please select accounts to link',
-              style: TextStyle(
-                fontSize: 14,
-                // fontWeight: FontWeight.bold,
+              const SizedBox(height: 10),
+              const Text(
+                'Select Account',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: _listAccounts.length,
-              itemBuilder: (BuildContext context, int index) {
-                return buildCardTile(
-                  icon: Icons.request_page_outlined,
-                  title: _listAccounts[index].accountTitle,
-                  desc: _listAccounts[index].accountNumber,
-                  type: _listAccounts[index].accountType,
-                  index: index,
-                );
-              },
-            ),
-            const Text(
-              'Consent required',
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
+              const SizedBox(height: 10),
+              const Text(
+                'Please select accounts to link',
+                style: TextStyle(
+                  fontSize: 14,
+                  // fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'This application needs your permission to:',
-              style: TextStyle(
-                fontSize: 14,
-                // fontWeight: FontWeight.bold,
+              const SizedBox(height: 20),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: _listAccounts.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return buildCardTile(
+                    icon: Icons.request_page_outlined,
+                    title: _listAccounts[index].accountTitle,
+                    desc: _listAccounts[index].accountNumber,
+                    type: _listAccounts[index].accountType,
+                    index: index,
+                  );
+                },
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: _listConsents.length,
-              itemBuilder: (BuildContext context, int index) {
-                return buildConsentTile(
-                  icon: Icons.request_page_outlined,
-                  title: _listConsents[index].title,
-                  desc: _listConsents[index].desc,
-                  index: index,
-                );
-              },
-            ),
-            const Text(
-              'Access Time',
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
+              const Text(
+                'Consent required',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'Grant access for following days:',
-              style: TextStyle(
-                fontSize: 14,
-                // fontWeight: FontWeight.bold,
+              const SizedBox(height: 10),
+              const Text(
+                'This application needs your permission to:',
+                style: TextStyle(
+                  fontSize: 14,
+                  // fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-            CustomDropDown(
-              icon: Icons.location_city_rounded,
-              selectedValue: _selectedCityId,
-              hintText: 'Expiry',
-              itemsList: ["1 Day", "3 Days", "1 Week", "15 Days", "1 Month"].map<DropdownMenuItem<String>>((item) {
-                return DropdownMenuItem(
-                  child: Text(item),
-                  value: item,
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  print(value);
-                  _selectedCityId = value;
-                });
-                // FocusScope.of(context).requestFocus(focusEmail);
-              },
-            ),
-            const SizedBox(height: 20),
-            CustomButton(
-              title: 'Continue',
-              onPressed: () {
-                FocusScope.of(context).unfocus();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ConfirmScreen(
-                      selectedAccount: _listAccounts,
-                      selectedConsent: _listConsents,
-                      days: _selectedCityId,
+              const SizedBox(height: 20),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: _listConsents.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return buildConsentTile(
+                    icon: Icons.request_page_outlined,
+                    title: _listConsents[index].title,
+                    desc: _listConsents[index].desc,
+                    index: index,
+                  );
+                },
+              ),
+              const Text(
+                'Access Time',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Grant access for following days:',
+                style: TextStyle(
+                  fontSize: 14,
+                  // fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              CustomDropDown(
+                icon: Icons.location_city_rounded,
+                selectedValue: _selectedCityId,
+                hintText: 'Expiry',
+                itemsList: ["1 Day", "3 Days", "1 Week", "15 Days", "1 Month"].map<DropdownMenuItem<String>>((item) {
+                  return DropdownMenuItem(
+                    child: Text(item),
+                    value: item,
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    print(value);
+                    _selectedCityId = value;
+                  });
+                  // FocusScope.of(context).requestFocus(focusEmail);
+                },
+              ),
+              const SizedBox(height: 20),
+              CustomButton(
+                title: 'Continue',
+                onPressed: () {
+                  FocusScope.of(context).unfocus();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ConfirmScreen(
+                        selectedAccount: _listAccounts,
+                        selectedConsent: _listConsents,
+                        days: _selectedCityId,
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
-          ],
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
