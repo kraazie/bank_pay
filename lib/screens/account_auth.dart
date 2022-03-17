@@ -18,7 +18,7 @@ class _AccountAuthState extends State<AccountAuth> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         child: Form(
           key: _formKey,
           child: ListView(

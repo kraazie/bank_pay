@@ -52,7 +52,7 @@ class _ConsentScreenState extends State<ConsentScreen> {
     _listConsents.addAll(
       [
         Consent('Access your transaction history', 'Inflows and outflows', false),
-        Consent('Access your selected bank account information', 'Account number and balance', false),
+        Consent('Access your selected bank account \ninformation', 'Account number and balance', false),
         Consent('Access your personal information', 'Name, email, address and phone number', false),
       ],
     );
@@ -62,7 +62,7 @@ class _ConsentScreenState extends State<ConsentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -137,7 +137,7 @@ class _ConsentScreenState extends State<ConsentScreen> {
                 },
               ),
               const Text(
-                'Access Time',
+                'Access Upto',
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -158,7 +158,8 @@ class _ConsentScreenState extends State<ConsentScreen> {
                 icon: Icons.location_city_rounded,
                 selectedValue: _selectedCityId,
                 hintText: 'Expiry',
-                itemsList: ["1 Day", "3 Days", "1 Week", "15 Days", "1 Month"].map<DropdownMenuItem<String>>((item) {
+                itemsList: ["1 Day", "3 Days", "1 Week (24 March)", "15 Days", "1 Month"]
+                    .map<DropdownMenuItem<String>>((item) {
                   return DropdownMenuItem(
                     child: Text(item),
                     value: item,
@@ -231,7 +232,7 @@ class _ConsentScreenState extends State<ConsentScreen> {
                     Text(
                       desc ?? '',
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 13,
                         color: Colors.grey,
                       ),
                     ),
