@@ -1,3 +1,4 @@
+import 'package:bank_pay/constants/assets.dart';
 import 'package:flutter/material.dart';
 import '../routes.dart';
 import '../widget/custom_button.dart';
@@ -22,6 +23,12 @@ class _AccountAuthState extends State<AccountAuth> {
           key: _formKey,
           child: ListView(
             children: [
+              const Image(
+                image: AssetImage(Assets.secure),
+                fit: BoxFit.fitHeight,
+                height: 100,
+              ),
+              const SizedBox(height: 10),
               const Text(
                 'Authentication',
                 style: TextStyle(

@@ -13,7 +13,9 @@ class _SuccessState extends State<Success> {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20.0),
-        child: ListView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
               'Connected!',
@@ -35,7 +37,10 @@ class _SuccessState extends State<Success> {
             const SizedBox(height: 20),
             Icon(
               Icons.check_circle_outlined,
+              size: 50,
+              color: Colors.green,
             ),
+            const SizedBox(height: 10),
             const Text(
               'A connection to your bank has been made!',
               style: TextStyle(

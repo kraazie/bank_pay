@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
+import '../constants/assets.dart';
 import '../constants/color.dart';
 import '../routes.dart';
 import '../widget/custom_button.dart';
@@ -45,11 +46,11 @@ class _OTPScreenState extends State<OTPScreen> {
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
         child: ListView(
           children: [
-            // Image(
-            //   image: AssetImage(Assets.otp),
-            //   fit: BoxFit.fitHeight,
-            //   height: 100,
-            // ),
+            const Image(
+              image: AssetImage(Assets.otp),
+              fit: BoxFit.fitHeight,
+              height: 100,
+            ),
             const SizedBox(height: 10),
             const Text(
               'OTP Verification',

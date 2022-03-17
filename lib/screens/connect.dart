@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bank_pay/routes.dart';
 
+import '../constants/assets.dart';
+
 class Bank {
   String? bankName;
   String? image;
@@ -60,7 +62,14 @@ class _ConnectBankState extends State<ConnectBank> {
       body: Container(
         padding: const EdgeInsets.all(20.0),
         child: ListView(
+          physics: const BouncingScrollPhysics(),
           children: [
+            const Image(
+              image: AssetImage(Assets.logo),
+              fit: BoxFit.fitHeight,
+              height: 100,
+            ),
+            const SizedBox(height: 10),
             const Text(
               'Connect to your institution',
               style: TextStyle(
