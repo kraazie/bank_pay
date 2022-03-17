@@ -1,16 +1,19 @@
 import 'dart:async';
 
+import 'package:bank_pay/screens/connecting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 import '../constants/assets.dart';
 import '../constants/color.dart';
+import '../models/bank.dart';
 import '../routes.dart';
 import '../widget/custom_button.dart';
 
 class OTPScreen extends StatefulWidget {
-  OTPScreen({Key? key}) : super(key: key);
+  final Bank? selectedBank;
+  OTPScreen({Key? key, this.selectedBank}) : super(key: key);
 
   @override
   _OTPScreenState createState() => _OTPScreenState();
@@ -193,7 +196,13 @@ class _OTPScreenState extends State<OTPScreen> {
       FocusScope.of(context).unfocus();
 
       if (otp.length == 6) {
-        Navigator.of(context).pushNamed(Routes.consent);
+        // Navigator.of(context).pushNamed(Routes.connecting);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Connecting(selectedBank: widget.selectedBank),
+          ),
+        );
       }
     }
   }

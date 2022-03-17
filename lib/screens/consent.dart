@@ -158,8 +158,13 @@ class _ConsentScreenState extends State<ConsentScreen> {
                 icon: Icons.location_city_rounded,
                 selectedValue: _selectedCityId,
                 hintText: 'Expiry',
-                itemsList: ["1 Day", "3 Days", "1 Week (24 March)", "15 Days", "1 Month"]
-                    .map<DropdownMenuItem<String>>((item) {
+                itemsList: [
+                  "1 Day (19th March)",
+                  "3 Days (21st March)",
+                  "1 Week (25th March)",
+                  "15 Days (2nd April)",
+                  "1 Month (17th April)"
+                ].map<DropdownMenuItem<String>>((item) {
                   return DropdownMenuItem(
                     child: Text(item),
                     value: item,

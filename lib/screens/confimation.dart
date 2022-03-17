@@ -21,9 +21,9 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Image(
               image: AssetImage(Assets.confirm),
@@ -44,7 +44,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
               'Are you sure you want to grant access to following Account(s):',
               style: TextStyle(
                 fontSize: 14,
-                // fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.start,
             ),
@@ -60,24 +60,27 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
               'With the following permission: ',
               style: TextStyle(
                 fontSize: 14,
-                // fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.start,
             ),
             for (var i = 0; i < widget.selectedConsent!.length; i++)
-              if (widget.selectedAccount![i].isSelected == true)
+              if (widget.selectedConsent![i].isSelected == true)
                 buildCardTile(
                   title: widget.selectedConsent![i].title,
                   desc: widget.selectedConsent![i].desc,
                 ),
             SizedBox(height: 20),
             Text(
-              'Access Time: ${widget.days}',
+              'Access Time:',
               style: TextStyle(
                 fontSize: 14,
-                // fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.start,
+            ),
+            buildCardTile(
+              title: widget.days,
             ),
             const SizedBox(height: 20),
             CustomButton(
@@ -113,13 +116,14 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                   fontSize: 14,
                 ),
               ),
-              Text(
-                desc ?? '',
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
+              if (desc != null)
+                Text(
+                  desc,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                  ),
                 ),
-              ),
               if (type != null)
                 Text(
                   type,

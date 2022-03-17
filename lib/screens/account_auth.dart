@@ -1,11 +1,14 @@
 import 'package:bank_pay/constants/assets.dart';
+import 'package:bank_pay/models/bank.dart';
+import 'package:bank_pay/screens/otp.dart';
 import 'package:flutter/material.dart';
 import '../routes.dart';
 import '../widget/custom_button.dart';
 import '../widget/custom_textfield.dart';
 
 class AccountAuth extends StatefulWidget {
-  AccountAuth({Key? key}) : super(key: key);
+  final Bank? selectedBank;
+  AccountAuth({Key? key, this.selectedBank}) : super(key: key);
 
   @override
   State<AccountAuth> createState() => _AccountAuthState();
@@ -82,7 +85,13 @@ class _AccountAuthState extends State<AccountAuth> {
                   FocusScope.of(context).unfocus();
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    Navigator.of(context).pushNamed(Routes.otp);
+                    // Navigator.of(context).pushNamed(Routes.otp);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OTPScreen(selectedBank: widget.selectedBank),
+                      ),
+                    );
                   }
                 },
               ),

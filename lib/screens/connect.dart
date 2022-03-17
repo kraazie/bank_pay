@@ -1,13 +1,9 @@
+import 'package:bank_pay/screens/account_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_pay/routes.dart';
 
 import '../constants/assets.dart';
-
-class Bank {
-  String? bankName;
-  String? image;
-  Bank(this.bankName, this.image);
-}
+import '../models/bank.dart';
 
 class ConnectBank extends StatefulWidget {
   ConnectBank({Key? key}) : super(key: key);
@@ -24,34 +20,30 @@ class _ConnectBankState extends State<ConnectBank> {
 
     _listBanks.addAll(
       [
-        Bank('Al Baraka Bank (Pakistan) Limited', ''),
-        Bank('Allied Bank Limited', ''),
-        Bank('Askari Bank', ''),
-        Bank('Bank Alfalah Limited', ''),
-        Bank('Bank Al-Habib Limited', ''),
-        Bank('BankIslami Pakistan Limited', ''),
-        Bank('Citi Bank', ''),
-        Bank('Dubai Islamic Bank Pakistan Limited', ''),
-        Bank('Faysal Bank Limited', ''),
-        Bank('First Women Bank Limited', ''),
-        Bank('Habib Bank Limited', ''),
-        Bank('Standard Chartered Bank (Pakistan) Limited', ''),
-        Bank('Habib Metropolitan Bank Limited', ''),
-        Bank('Industrial and Commercial Bank of China', ''),
-        Bank('Industrial Development Bank of Pakistan', ''),
-        Bank('JS Bank Limited', ''),
-        Bank('MCB Bank Limited', ''),
-        Bank('MCB Islamic Bank Limited', ''),
-        Bank('Meezan Bank Limited', ''),
-        Bank('National Bank of Pakistan', ''),
-        Bank('Bank of Khyber', ''),
-        Bank('Sindh Bank', ''),
-        Bank('Bank of Punjab', ''),
-        Bank('Samba Bank Limited', ''),
-        Bank('Silkbank Limited', ''),
-        Bank('Soneri Bank', ''),
-        Bank('Summit Bank', ''),
-        Bank('United Bank Limited', ''),
+        Bank('Al Baraka Bank', Assets.albaraka),
+        Bank('Allied Bank', Assets.allied),
+        Bank('Askari Bank', Assets.askari),
+        Bank('Bank Alfalah', Assets.alfalah),
+        Bank('Bank Al-Habib', Assets.alhabib),
+        Bank('BankIslami', Assets.bankislami),
+        Bank('Dubai Islamic Bank', Assets.dib),
+        Bank('Faysal Bank', Assets.faysal),
+        Bank('First Women Bank', Assets.fmb),
+        Bank('Habib Bank', Assets.hbl),
+        Bank('Standard Chartered Bank', Assets.scb),
+        Bank('Habib Metropolitan Bank', Assets.habibmetro),
+        Bank('JS Bank', Assets.js),
+        Bank('MCB Bank', Assets.mcb),
+        Bank('Meezan Bank', Assets.meezan),
+        Bank('National Bank of Pakistan', Assets.national),
+        Bank('Bank of Khyber', Assets.bok),
+        Bank('Sindh Bank', Assets.sindh),
+        Bank('Bank of Punjab', Assets.bop),
+        Bank('Samba Bank', Assets.samba),
+        Bank('Silkbank', Assets.silk),
+        Bank('Soneri Bank', Assets.soneri),
+        Bank('Summit Bank', Assets.summit),
+        Bank('United Bank', Assets.ubl),
       ],
     );
   }
@@ -94,11 +86,25 @@ class _ConnectBankState extends State<ConnectBank> {
               itemBuilder: (BuildContext context, int index) {
                 return Card(
                   child: ListTile(
-                    leading: const Icon(Icons.bakery_dining),
+                    // leading: const Icon(Icons.bakery_dining),
+                    leading: Image(
+                      image: AssetImage(_listBanks[index].image ?? Assets.logo),
+                      fit: BoxFit.fitHeight,
+                      height: 30,
+                    ),
                     title: Text(_listBanks[index].bankName ?? ''),
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () {
-                      Navigator.of(context).pushNamed(Routes.accountAuth);
+                      // Navigator.of(context).pushNamed(Routes.accountAuth);
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AccountAuth(
+                            selectedBank: _listBanks[index],
+                          ),
+                        ),
+                      );
                     },
                   ),
                 );
